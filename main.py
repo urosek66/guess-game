@@ -1,35 +1,55 @@
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, redirect, url_for
+from models import User, db
 import random
 
 app = Flask(__name__)
+db.create_all()
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
 
-        secret_number = request.cookies.get("secret_number")
+        return render_template("index.html")
 
-        response = make_response(render_template("index.html"))
-        if not secret_number:
-            random_number = random.randint(1, 30)
-            response.set_cookie("secret_number", str(random_number))
+    elif request.method == "POST":
+        name = request.form.get("name")
+        email = request.form.get("email")
+        secret_number = random.randint(1, 30)
+
+        user = User(name=name, email=email, secret_number=secret_number)
+        user.save()
+
+        response = make_response(redirect(url_for('game')))
+        response.set_cookie("user_name", name)
 
         return response
 
-    elif request.method == "POST":
-        secret_number = int(request.cookies.get("secret_number"))
-        user_guess = int((request.form.get("number")))
 
-        if secret_number == user_guess:
+@app.route("/game", methods=["GET", "POST"])
+def game():
+    if request.method == "GET":
+
+
+        return render_template("game.html")
+
+    elif request.method == "POST":
+        user_guess = request.form.get("number")
+        user_name = request.cookies.get("user_name")
+        user = db.query(User).filter_by(name=user_name).first()
+        secret_number = user.secret_number
+
+        if user_guess == secret_number:
             text = "Congratulations your are correct."
             play_again = "Start over"
+            new_secret = random.randint(1, 30)
+            user.secret_number = new_secret
+            user.save()
             response = make_response(render_template("result.html", text=text, play_again=play_again))
-            response.set_cookie("secret_number", str(random.randint(1, 30)))
 
             return response
 
-        elif secret_number > user_guess:
+        elif user_guess < secret_number:
             text = "Sorry your guess is to small."
             play_again = "Play again"
             return render_template("result.html", text=text, play_again=play_again)

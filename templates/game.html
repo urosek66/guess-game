@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>Try to guess what's the secret number.</p>
+
+<form method="post" action="game">
+    <label for="guess_number">Enter number beetween 1 and 30:</label>
+    <input id="guess_number" name="number" type="number" min="1" max="30">
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock content %}
