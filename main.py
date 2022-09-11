@@ -54,7 +54,7 @@ def game():
             play_again = "Play again"
             return render_template("result.html", text=text, play_again=play_again)
 
-        else:
+        elif user_guess > secret_number:
             text = "Sorry your guess is to big."
             play_again = "Play again"
             return render_template("result.html", text=text, play_again=play_again)
