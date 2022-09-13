@@ -2,11 +2,13 @@
 
 {% block content %}
 <h1>Welcome to the Guess the secret number game</h1>
-<p>Enter your name and email and then you can play.</p>
+<p>Enter your name, email and password and then you can play.</p>
 <form method="post" action="/">
     <input  name="name" type="text" placeholder="Enter name">
     <br>
      <input  name="email" type="email" placeholder="Enter your email">
+    <br>
+    <input type="password" name="user_password" placeholder="Enter your password">
     <br>
     <button type="submit">Submit</button>
 </form>
