@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Best score list</title>{% endblock title %}
+{% block header %}
+<p class="link"><a href="/game">Back to game</a></p>
+{% endblock header %}
+
+{% block content %}
+<h2>Best score list:</h2>
+
+<ol>
+        {% for user in users %}
+        <li><strong>Name:</strong> {{ user.name }} <strong>Best score:</strong> {{ user.best_score }} attempts</li>
+        {% endfor %}
+</ol>
+
+{% endblock content %}

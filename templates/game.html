@@ -1,7 +1,14 @@
 {% extends "base.html" %}
+{% block title %}<title>Guess game</title>{% endblock title %}
+{% block header %}
+    <p class="link"><a href="/profile">Profile</a></p>
+    <p class="link"><a href="/users">Users</a></p>
+    <p class="link"><a href="/score">Best score list</a></p>
+{% endblock header %}
 
 {% block content %}
-<h1>Hello {{user}}</h1>
+<div class="container">
+    <h1>Hello {{user}}</h1>
 <p>Try to guess what's the secret number.</p>
 
 <form method="post" action="/game">
@@ -10,5 +17,10 @@
     <br>
     <button type="submit">Submit</button>
 </form>
+
+<h2>
+    <a href="/">New Player</a>
+</h2>
+</div>
 
 {% endblock content %}

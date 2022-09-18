@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Users</title>{% endblock title %}
+
+{% block header %}
+<p class="link"><a href="/game">Back to game</a></p>
+{% endblock header %}
+
+{% block content %}
+<h3>Users</h3>
+
+<ul>
+{% for user in users %}
+    <li><a href="/user/{{ user.id }}">{{ user.name }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock content %}

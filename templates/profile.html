@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Profile</title>{% endblock title %}
+{% block header %}
+<p class="link">
+  <a href="/game">Back to game</a>
+</p>
+{% endblock header %}
+{% block content %}
+<p><strong>Your name:</strong> {{ user.name }}</p>
+<p><strong>Your email:</strong> {{ user.email }}</p>
+<p><strong>Your best score:</strong> {{ user.best_score }} attempts</p>
+
+<p><a href="profile/edit">Edit profile</a></p>
+<p><a href="profile/delete">Delete profile</a></p>
+{% endblock content %}
